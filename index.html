@@ -111,18 +111,22 @@
     function playSound(button) {
       const url = button.getAttribute('data-url');
 
-      // 🔊 Play sound
-      if (audioInstance) {
-        audioInstance.pause();
-        audioInstance.currentTime = 0;
-      }
-      audioInstance = new Audio(url);
-      audioInstance.play().catch(err => console.error(err));
+      // If no audio is playing, create an audio instance
+      if (!audioInstance) {
+        audioInstance = new Audio(url);
+        audioInstance.loop = true; // Loop the sound indefinitely
+        audioInstance.volume = 1; // Ensure full volume
+        audioInstance.play().catch(err => console.error(err));
 
-      // 💥 Trigger shake animation
-      button.classList.remove('shake'); // reset if already shaking
-      void button.offsetWidth;          // force reflow
-      button.classList.add('shake');
+        // Disable user interaction to prevent pausing or changing volume
+        audioInstance.onpause = (e) => e.preventDefault();
+        audioInstance.onvolumechange = (e) => e.preventDefault();
+        
+        // 💥 Trigger shake animation
+        button.classList.remove('shake'); // reset if already shaking
+        void button.offsetWidth;          // force reflow
+        button.classList.add('shake');
+      }
     }
   </script>
 
