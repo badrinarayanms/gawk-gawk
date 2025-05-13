@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Gawk Gawk Button</title>
+  <title>Gawk Gawk Button with Speed Control</title>
   <style>
     body {
       background-color: #111;
@@ -12,6 +12,28 @@
       height: 100vh;
       margin: 0;
       font-family: 'Arial', sans-serif;
+      flex-direction: column;
+      color: white;
+      position: relative;
+    }
+
+    /* Contribute button positioned top-right */
+    .contribute-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #FF5E5B;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .contribute-button:hover {
+      background-color: #FFB75E;
     }
 
     #instant-page-button {
@@ -62,22 +84,6 @@
       box-shadow: 0 0 30px rgba(255, 94, 91, 0.9);
     }
 
-    .loader-large {
-      display: none;
-    }
-
-    .large-button-shadow {
-      box-shadow: 0 0 25px rgba(255, 94, 91, 0.5);
-      border-radius: 50%;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      z-index: 0;
-    }
-
-    /* 🔥 Shake Animation */
     .shake {
       animation: shake 0.3s;
     }
@@ -89,9 +95,174 @@
       75% { transform: translate(-2px, 2px); }
       100% { transform: translate(0px, 0px); }
     }
+
+    /* Slider styling */
+    .slider {
+      margin-top: 20px;
+      width: 200px;
+      background: #333;
+      border-radius: 5px;
+    }
+
+    .slider input {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 10px;
+      border-radius: 5px;
+      background: #FF5E5B;
+      outline: none;
+    }
+
+    .slider input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    /* Display speed percentage */
+    .speed-display {
+      margin-top: 10px;
+      color: white;
+      font-size: 18px;
+    }
+
+    /* Button container for speed controls */
+    .speed-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .speed-buttons button {
+      background-color: #FF5E5B;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .speed-buttons button:hover {
+      background-color: #FFB75E;
+    }
+
+    /* Funny tagline */
+    .funny-tagline {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #FFB75E;
+      text-align: center;
+    }
+
+    .funny-tagline a {
+      color: #FFB75E;
+      text-decoration: none;
+    }
+
+    /* Title styling */
+    .gawk-gawk-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+
+    .github-link {
+        position: absolute;
+      top: 20px;
+      right: 20px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color:#f3f4f6 ;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(110, 106, 106, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .github-link:hover {
+    background-color: #f3f4f6;
+  }
+
+  .github-icon {
+    margin-right: 8px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .github-text {
+    display: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  @media (min-width: 640px) {
+    .github-text {
+      display: inline;
+    }
+  }
+
+  .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 350px;
+      margin: 20px;
+      margin-top: 100px;
+      text-align: center;
+    }
+
+    .text {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: black;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Contribute button positioned at top-right -->
+  <a
+  href="https://github.com/badrinarayanms/gawk-gawk"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="github-link"
+>
+  <img src="assets/githubIcon.svg" alt="Github star icon" class="github-icon" />
+  <span class="github-text">
+    Contribute ⭐
+  </span>
+</a>
+  <!-- Gawk Gawk Title -->
+  <div class="gawk-gawk-title" id="gawkGawkTitle">
+    Gawk Gawk!
+  </div>
 
   <div id="instant-page-button">
     <div class="circle large-button-background"></div>
@@ -105,6 +276,32 @@
     </button>
   </div>
 
+  <!-- Slider to control playback speed -->
+  <div class="slider">
+    <input type="range" id="speedSlider" min="50" max="200" step="10" value="100">
+  </div>
+  <p class="speed-display" id="speedValue">Speed: 100%</p>
+
+  <!-- Buttons for predefined playback speeds -->
+  <div class="speed-buttons">
+    <button onclick="setSpeed(0.5)">0.5x</button>
+    <button onclick="setSpeed(1)">1x</button>
+    <button onclick="setSpeed(2)">2x</button>
+    <button onclick="setSpeed(3)">3x</button>
+    <button onclick="setSpeed(4)">4x</button>
+    <button onclick="setSpeed(5)">5x</button>
+    <button onclick="setSpeed(6)">6x</button>
+    <button onclick="setSpeed(7)">7x</button>
+    <button onclick="setSpeed(8)">8x</button>
+    <button onclick="setSpeed(9)">9x</button>
+    <button onclick="setSpeed(10)">10x</button>
+  </div>
+
+  <!-- Funny tagline making fun of you -->
+ <div class="card">
+    <p class="text">Don't just gawk at the cool stuff—gawk and connect with me on LinkedIn for a deep dive into the tech world! 🚀 Let's innovate together!</p>
+    <a href="https://www.linkedin.com/in/badri-narayan-m-s-60bab42a2/" class="button">Connect on LinkedIn</a>
+  </div>
   <script>
     let audioInstance = null;
 
@@ -115,17 +312,38 @@
       if (!audioInstance) {
         audioInstance = new Audio(url);
         audioInstance.loop = true; // Loop the sound indefinitely
-        audioInstance.volume = 1; // Ensure full volume
+        audioInstance.volume = 1; // Set volume to maximum
         audioInstance.play().catch(err => console.error(err));
 
-        // Disable user interaction to prevent pausing or changing volume
-        audioInstance.onpause = (e) => e.preventDefault();
-        audioInstance.onvolumechange = (e) => e.preventDefault();
-        
-        // 💥 Trigger shake animation
-        button.classList.remove('shake'); // reset if already shaking
-        void button.offsetWidth;          // force reflow
-        button.classList.add('shake');
+        // Trigger shake animation on the title when button is pressed
+        const title = document.getElementById('gawkGawkTitle');
+        title.classList.add('shake');
+
+        // Reset shake animation after it completes
+        setTimeout(() => {
+          title.classList.remove('shake');
+        }, 300);
+      }
+    }
+
+    // Slider to control playback speed
+    const speedSlider = document.getElementById('speedSlider');
+    const speedValue = document.getElementById('speedValue');
+
+    speedSlider.addEventListener('input', function() {
+      if (audioInstance) {
+        const speedPercentage = speedSlider.value;
+        audioInstance.playbackRate = speedPercentage / 100; // Adjust speed based on slider
+        speedValue.textContent = `Speed: ${speedPercentage}%`;
+      }
+    });
+
+    // Buttons to set predefined speeds
+    function setSpeed(speed) {
+      if (audioInstance) {
+        audioInstance.playbackRate = speed; // Set the speed directly
+        speedSlider.value = speed * 10; // Adjust slider to match button speed (times 10 for display)
+        speedValue.textContent = `Speed: ${speed * 10}%`;
       }
     }
   </script>
