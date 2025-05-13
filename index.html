@@ -243,20 +243,28 @@
     .button:hover {
       background-color: #444;
     }
+    
   </style>
 </head>
 <body>
 
   <!-- Contribute button positioned at top-right -->
-  <a
+ <a
   href="https://github.com/badrinarayanms/gawk-gawk"
   target="_blank"
   rel="noopener noreferrer"
   class="github-link"
->
+  >
   <img src="assets/githubIcon.svg" alt="Github star icon" class="github-icon" />
-  <span class="github-text">
-    Contribute ⭐
+  <span class="hidden text-sm font-medium sm:inline">
+    <span id="loading-text">Loading...</span>
+    <span id="error-text" class="text-red-500" style="display: none;"></span>
+    <span id="stars-text" style="display: none;">Contribute <span id="stars-count"></span> ⭐</span>
+  </span>
+  <span class="text-sm font-medium sm:hidden">
+    <span id="loading-text-mobile">Loading...</span>
+    <span id="error-text-mobile" class="text-red-500" style="display: none;"></span>
+    <span id="stars-text-mobile" style="display: none;"></span>
   </span>
 </a>
   <!-- Gawk Gawk Title -->
@@ -303,6 +311,40 @@
     <a href="https://www.linkedin.com/in/badri-narayan-m-s-60bab42a2/" class="button">Connect on LinkedIn</a>
   </div> -->
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const starsText = document.getElementById('stars-text');
+    const errorText = document.getElementById('error-text');
+    const loadingText = document.getElementById('loading-text');
+    const starsCount = document.getElementById('stars-count');
+    const errorTextMobile = document.getElementById('error-text-mobile');
+    const loadingTextMobile = document.getElementById('loading-text-mobile');
+    const starsTextMobile = document.getElementById('stars-text-mobile');
+
+    // Fetch the star count from the GitHub API
+    fetch('https://api.github.com/repos/badrinarayanms/gawk-gawk')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch stars');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const starCount = data.stargazers_count;
+        starsCount.textContent = starCount;
+        starsText.style.display = 'inline';
+        starsTextMobile.style.display = 'inline';
+        loadingText.style.display = 'none';
+        loadingTextMobile.style.display = 'none';
+      })
+      .catch(error => {
+        errorText.textContent = error.message;
+        errorText.style.display = 'inline';
+        errorTextMobile.textContent = error.message;
+        errorTextMobile.style.display = 'inline';
+        loadingText.style.display = 'none';
+        loadingTextMobile.style.display = 'none';
+      });
+  });
     let audioInstance = null;
 
     function playSound(button) {
