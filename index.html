@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gawk Gawk Button</title>
+  <style>
+    body {
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #instant-page-button {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .circle.large-button-background {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #FF5E5B, #FFB75E);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      box-shadow: 0 0 15px rgba(255, 94, 91, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    button.large-button {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      outline: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button.large-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 94, 91, 0.7);
+    }
+
+    button.large-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 30px rgba(255, 94, 91, 0.9);
+    }
+
+    .loader-large {
+      display: none;
+    }
+
+    .large-button-shadow {
+      box-shadow: 0 0 25px rgba(255, 94, 91, 0.5);
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      z-index: 0;
+    }
+
+    /* 🔥 Shake Animation */
+    .shake {
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(2px, 2px); }
+      25% { transform: translate(-2px, -2px); }
+      50% { transform: translate(2px, -2px); }
+      75% { transform: translate(-2px, 2px); }
+      100% { transform: translate(0px, 0px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="instant-page-button">
+    <div class="circle large-button-background"></div>
+    <button 
+      id="instant-page-button-element" 
+      class="large-button" 
+      data-url="sounds/gawk-gawk.mp3" 
+      onclick="playSound(this)" 
+      title="Play Gawk gawk sound">
+      Click Me!
+    </button>
+  </div>
+
+  <script>
+    let audioInstance = null;
+
+    function playSound(button) {
+      const url = button.getAttribute('data-url');
+
+      // 🔊 Play sound
+      if (audioInstance) {
+        audioInstance.pause();
+        audioInstance.currentTime = 0;
+      }
+      audioInstance = new Audio(url);
+      audioInstance.play().catch(err => console.error(err));
+
+      // 💥 Trigger shake animation
+      button.classList.remove('shake'); // reset if already shaking
+      void button.offsetWidth;          // force reflow
+      button.classList.add('shake');
+    }
+  </script>
+
+</body>
+</html>
