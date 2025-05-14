@@ -6,18 +6,7 @@ import Link from "next/link"
 export default function Home() {
   return (
     <>
-      {/* Navbar */}
-      <nav className="w-full bg-gray-900 text-white shadow-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <div className="text-xl font-bold">Gawkify</div>
-          <div className="flex space-x-6 text-sm md:text-base">
-            <Link href="/" className="hover:text-blue-400">Home</Link>
-            <Link href="/about" className="hover:text-blue-400">About</Link>
-            <Link href="/admin" className="hover:text-blue-400">Admin</Link>
-          </div>
-        </div>
-      </nav>
-
+      
       {/* Main content */}
       <main className="flex min-h-screen flex-col items-center justify-start bg-black p-4 md:p-8">
         <h1 className="mb-8 mt-12 text-center text-4xl font-extrabold uppercase tracking-wider text-white md:text-6xl">
