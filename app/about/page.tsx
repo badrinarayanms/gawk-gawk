@@ -125,7 +125,7 @@ export default function AboutPage() {
               <ul className="mt-4 space-y-2 text-gray-300">
                 <li className="flex items-start">
                   <span className="mr-2 text-purple-400">•</span>
-                  Contest runs until December 31, 2023
+                  Contest runs until july 15, 2025
                 </li>
                 <li className="flex items-start">
                   <span className="mr-2 text-purple-400">•</span>
