@@ -19,6 +19,12 @@ export default function Home() {
           <Leaderboard />
         </div>
       </div>
+      <footer className="text-center text-xs text-gray-500 mt-10 pb-4">
+  © 2025 Gawkify · 
+  <a href="/" className="text-blue-500 hover:underline">Privacy Policy</a> · 
+  <a href="/" className="text-blue-500 hover:underline">Terms</a>
+</footer>
+
     </main>
   )
 }
