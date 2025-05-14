@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Gawk-Gawk',
+  description: 'Created with gawk',
 }
 
 export default function RootLayout({
@@ -14,6 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9349683492224058"
+     crossorigin="anonymous"></script>
+      </head>
       <body>{children}</body>
     </html>
   )
