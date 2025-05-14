@@ -135,7 +135,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-4 p-32">
-       <Navbar />
+       
       <h2 className="text-xl font-bold text-black">Manage Country Clicks</h2>
       <div className="rounded-lg border border-purple-800 bg-purple-950/80 p-4">
         <div className="flex flex-col gap-4 sm:flex-row">
