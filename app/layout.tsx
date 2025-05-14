@@ -21,7 +21,10 @@ export default function RootLayout({
           crossorigin="anonymous" 
         ></script>
       </head>
-      <body>{children}</body>
+      <body>
+         <Navbar />
+        {children}
+      </body>
     </html>
   )
 }
